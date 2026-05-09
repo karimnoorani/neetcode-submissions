@@ -1,0 +1,16 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        sMap = defaultdict(int)
+        L = 0
+        res = 0
+
+        for R in range(len(s)):
+            sMap[s[R]] += 1
+
+            while R-L+1 - max(sMap.values()) > k:
+                sMap[s[L]] -= 1
+                L += 1
+            
+            res = max(res, R-L+1)
+        
+        return res
